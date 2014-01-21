@@ -1,0 +1,49 @@
+{
+  "name": "tiny-ecs",
+  "version": "0.1.0",
+  "description": "A mean lean Entity-Component-System library.",
+  "keywords": [
+    "entity",
+    "component",
+    "system",
+    "entities",
+    "game"
+  ],
+  "author": {
+    "name": "Brandon Valosek",
+    "email": "bvalosek@gmail.com",
+    "url": "http://brandon.is/awesome"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "tape test/*.js"
+  },
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "tape": "~2.3.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:bvalosek/tiny-ecs.git"
+  },
+  "testling": {
+    "files": "test/*.js",
+    "browsers": [
+      "ie/8..latest",
+      "chrome/28..canary",
+      "firefox/23..nightly",
+      "safari/5.1..latest",
+      "opera/latest",
+      "opera/next",
+      "iphone/latest",
+      "ipad/latest",
+      "android-browser/latest"
+    ]
+  },
+  "dependencies": {
+    "typedef": "~1.0.2"
+  }
+}
