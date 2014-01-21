@@ -88,7 +88,7 @@ if (hero.hasComponent(Position)) { ... }
 And to check if an entity has ALL of a set of components:
 
 ```javascript
-if (hero.hasComponents([Position, Sprite])) { ... }
+if (hero.hasAllComponents([Position, Sprite])) { ... }
 ```
 
 ### Querying Entities
