@@ -151,7 +151,45 @@ hero.addComponent(Position);
 
 ### Using a Recycler Function
 
+### Creating Components
+
+Any object constructor can be used as a component, nothing special required.
+Components should be lean, primarily data containers, leaving all the heavy
+lifting for the systems.
+
+```javascript
+function Position()
+{
+  this.x = 0;
+  this.y = 0;
+}
+```
+
 ### Creating Systems
+
+In TinyECS, there is no formal notion of a system. A system is considered any
+context in which entities and their components are updated. As to how this
+occurs will vary depending on your use.
+
+In the example of a game, mainting a list of systems that are instantiated with
+some sort of IoC container that request a list of entities seems like a good
+idea.
+
+```
+function PhysicsSystem(entities)
+{
+  // Dependency inject -- reference to our EntityManager
+  this.entities = entities;
+}
+
+PhysicsSystem.prototype.update = function(dt, time)
+{
+  var toUpdate = this.entities.queryComponents([Position, Physics]);
+
+  toUpdate.forEach(function(entity) { ... });
+  ...
+}
+```
 
 ## Tern Support
 
