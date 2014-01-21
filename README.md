@@ -149,6 +149,10 @@ The factory will be called with `T === Position`:
 hero.addComponent(Position);
 ```
 
+### Using a Recycler Function
+
+### Creating Systems
+
 ## Tern Support
 
 The source files are all decorated with [JSDoc3](http://usejsdoc.org/)-style
