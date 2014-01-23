@@ -123,64 +123,6 @@ Via the manager:
 entities.remove(hero);
 ```
 
-### Using a Factory Function
-
-You can pass in an optional factory function to the `EntityManager` with the
-signature `Function(T: TypeToCreate): Object`. This function will be used to create
-all components and entities, allowing you to wire in some sort of dependency
-injector if needed (such as [Sack](http://github.com/bvalosek/sack)), or object
-pooling.
-
-```javascript
-var entities = new EntityManager(function(T) {
-  return container.make(T);
-});
-```
-
-The factory will be called with `T === Entity`:
-
-```javascript
-var hero = entities.createEntity();
-```
-
-The factory will be called with `T === Position`:
-
-```javascript
-hero.addComponent(Position);
-```
-
-### Using a Recycler Function
-
-In the same way you can use a factory function, you can register a recycler
-with the second constructor argument to the `EntityManager`:
-
-```
-var pool = new SomeAwesomeObjectPoolClass();
-
-function factory(T) { return pool.aquire(T); }
-
-function recycler(instance) { pool.release(instance); }
-
-var entities = new EntityManager(factory, recycler);
-```
-
-The factory will be called to aquire the `Entity`, `Position`, and `Sprite`
-components from the object pool:
-
-```javascript
-var hero = entities
-  .createEntity()
-  .addComponent(Position)
-  .addComponent(Sprite);
-```
-
-And the recycler will be called on the individual components first, and then
-the entity itself:
-
-```javascript
-hero.remove();
-```
-
 ### Creating Components
 
 Any object constructor can be used as a component, nothing special required.
