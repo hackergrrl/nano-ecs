@@ -1,5 +1,9 @@
 # Change History
 
+## 1.2.0 (2014-01-22)
+
+* Added EntityManager#poolStats()
+
 ## 1.1.0 (2014-01-22)
 
 * Adding in object pooling for entities and components.
