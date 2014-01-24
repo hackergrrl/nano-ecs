@@ -1,8 +1,13 @@
 # Change History
 
+## 1.3.0 (2014-01-24)
+
+* `Vec2` and `QuadTree` classes added.
+* Improvements to `Pool` class.
+
 ## 1.2.0 (2014-01-22)
 
-* Added EntityManager#poolStats()
+* Added `EntityManager#poolStats()`.
 
 ## 1.1.0 (2014-01-22)
 
