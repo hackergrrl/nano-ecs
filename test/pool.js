@@ -42,3 +42,25 @@ test('object reseting', function(t) {
   t.strictEqual(v2.y, 0, 'y reset');
 });
 
+
+test('Explicit init', function(t) {
+  t.plan(5);
+
+  function V() { this.x = 0; this.y = 0; }
+  V.prototype.__init = function() {
+    this.x = this.y = 0;
+    t.pass('__init fired');
+  };
+
+  var pool = new Pool(V);
+
+  var v = pool.aquire();
+  v.x = 5;
+  v.y = 7;
+  pool.release(v);
+  var u = pool.aquire();
+  t.strictEqual(u, v);
+  t.strictEqual(u.x, 0);
+  t.strictEqual(u.y, 0);
+
+});
