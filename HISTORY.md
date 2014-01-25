@@ -1,5 +1,10 @@
 # Change History
 
+## 1.4.0 (2014-01-25)
+
+* Added `removeEntitiesByTag()` method
+* Removing entities in a loop still bad!!
+
 ## 1.3.0 (2014-01-24)
 
 * `Vec2` and `QuadTree` classes added.
