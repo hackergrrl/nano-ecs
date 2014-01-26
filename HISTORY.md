@@ -1,5 +1,10 @@
 # Change History
 
+## 1.4.1 (2014-01-26)
+
+* Fixed a bug of having references to components on entities not getting
+* properly deleted.
+
 ## 1.4.0 (2014-01-25)
 
 * Added `removeEntitiesByTag()` method
