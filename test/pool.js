@@ -1,5 +1,5 @@
 var test = require('tape');
-var Pool = require('../lib/Pool.js');
+var ObjectPool = require('../lib/ObjectPool.js');
 
 function Vec2()
 {
@@ -10,7 +10,7 @@ function Vec2()
 test('basics', function(t) {
   t.plan(7);
 
-  var pool = new Pool(Vec2);
+  var pool = new ObjectPool(Vec2);
 
   t.strictEqual(pool.count, 0, '0 initialized');
   var v = pool.aquire();
@@ -29,7 +29,7 @@ test('basics', function(t) {
 test('object reseting', function(t) {
   t.plan(3);
 
-  var pool = new Pool(Vec2);
+  var pool = new ObjectPool(Vec2);
 
   var v = pool.aquire();
   v.x = 5;
@@ -52,7 +52,7 @@ test('Explicit init', function(t) {
     t.pass('__init fired');
   };
 
-  var pool = new Pool(V);
+  var pool = new ObjectPool(V);
 
   var v = pool.aquire();
   v.x = 5;
