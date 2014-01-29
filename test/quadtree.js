@@ -11,6 +11,8 @@ function mockEntity(x, y, w, h)
   };
 }
 
+function rando(m) { return Math.random(1234)*m - m/2; }
+
 function mockVec(x, y) { return {x: x, y: y}; }
 
 test('internal stuff', function(t) {
@@ -28,8 +30,8 @@ test('internal stuff', function(t) {
 
 });
 
-test('split and redist', function(t) {
-  t.plan(10);
+test('add / split / query / combine', function(t) {
+  t.plan(11);
 
   var tree = new QuadTree();
   tree.size.set(100,100);
@@ -56,5 +58,48 @@ test('split and redist', function(t) {
   t.deepEqual(tree.queryArea(mockVec(-40, 40), mockVec(5,5)), []);
   t.deepEqual(tree.queryArea(mockVec(-22, 17), mockVec(10,10)), [e2]);
   t.deepEqual(tree.queryArea(mockVec(0,0), mockVec(5,5)), [e3]);
+
+  tree._combine();
+  t.deepEqual(tree.entities, [e3, e, e2]);
+
+});
+
+test('pool fidelity', function(t) {
+  t.plan(5);
+
+  var tree = new QuadTree();
+
+  t.strictEqual(tree.pool.totalUsed(), 0, 'empty');
+
+  var size = 5000;
+  var fat = 100;
+
+  // offset
+  tree.size.set(size, size);
+  tree.position.set(-size/2, -size/2);
+
+  function fillTree() {
+    var list = [];
+    for (var x = 0; x < 1000; x++) {
+      var e = mockEntity(rando(size), rando(size), rando(fat), rando(fat));
+      list.push(e);
+      tree.insert(e);
+    }
+
+    return list;
+  }
+
+  fillTree();
+  tree.clear();
+  t.strictEqual(tree.pool.totalUsed(), 0);
+
+  var list = fillTree();
+  list.forEach(function(e) { tree.remove(e); });
+  tree.reIndex();
+
+  // We will naturally have 4 left over, but all nodes are empty
+  t.strictEqual(tree.pool.totalUsed(), 0);
+  t.strictEqual(tree.nodes.length, 0);
+  t.deepEqual(tree.entities, []);
 
 });
