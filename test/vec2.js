@@ -66,7 +66,6 @@ test('Pool semantics', function(t) {
   t.plan(6);
 
   var a = Vec2.aquire();
-  console.log(a);
   t.strictEqual(Vec2.release(), 1);
   Vec2.release(a);
   t.strictEqual(Vec2.release(), 0);

@@ -9,7 +9,6 @@ function mockEntities(parent, child, grandChild)
 
 function vEq(a, b) {
   var ep = 0.001;
-  console.log(a, b);
   return Math.abs(a.x - b.x) < ep && Math.abs(a.y - b.y) < ep;
 }
 
