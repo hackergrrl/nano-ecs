@@ -1,6 +1,6 @@
 {
   "name": "tiny-ecs",
-  "version": "1.4.1",
+  "version": "2.0.0",
   "description": "A mean lean Entity-Component-System library.",
   "keywords": [
     "entity",
