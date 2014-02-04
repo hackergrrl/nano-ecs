@@ -1,5 +1,5 @@
 var test = require('tape');
-var Spatial = require('../lib/Spatial.js');
+var Transform = require('../lib/Transform.js');
 
 function mockEntities(parent, child, grandChild)
 {
@@ -13,38 +13,35 @@ function vEq(a, b) {
 }
 
 test('Abs scale', function(t) {
-  t.plan(6);
+  t.plan(3);
 
-  var parent = new Spatial();
-  parent.scale.set(2, 3);
+  var parent = new Transform();
+  parent.scale = 2;
 
-  var child = new Spatial();
-  child.scale.set(4, 5);
+  var child = new Transform();
+  child.scale = 4;
 
-  var grandChild = new Spatial();
-  grandChild.scale.set(1/4, 1/3);
+  var grandChild = new Transform();
+  grandChild.scale = 1/4;
 
   // Mock injected entities
   mockEntities(parent, child, grandChild);
 
-  t.strictEqual(parent.absScale().x, 2);
-  t.strictEqual(parent.absScale().y, 3);
-  t.strictEqual(child.absScale().x, 8);
-  t.strictEqual(child.absScale().y, 15);
-  t.strictEqual(grandChild.absScale().x, 2);
-  t.strictEqual(grandChild.absScale().y, 5);
+  t.strictEqual(parent.absScale(), 2);
+  t.strictEqual(child.absScale(), 8);
+  t.strictEqual(grandChild.absScale(), 2);
 });
 
 test('Abs rotation', function(t) {
   t.plan(3);
 
-  var parent = new Spatial();
+  var parent = new Transform();
   parent.rotation = 0.3;
 
-  var child = new Spatial();
+  var child = new Transform();
   child.rotation = 0.4;
 
-  var grandChild = new Spatial();
+  var grandChild = new Transform();
   grandChild.rotation = 0.5;
 
   // Mock injected entities
@@ -58,9 +55,9 @@ test('Abs rotation', function(t) {
 test('abs location identity', function(t) {
   t.plan(6);
 
-  var parent = new Spatial();
-  var child = new Spatial();
-  var grandChild = new Spatial();
+  var parent = new Transform();
+  var child = new Transform();
+  var grandChild = new Transform();
 
   mockEntities(parent, child, grandChild);
 
@@ -73,29 +70,12 @@ test('abs location identity', function(t) {
   t.notStrictEqual(parent.absPosition(), grandChild.absPosition());
 });
 
-test('abs scale identity', function(t) {
-  t.plan(6);
-
-  var parent = new Spatial();
-  var child = new Spatial();
-  var grandChild = new Spatial();
-  mockEntities(parent, child, grandChild);
-
-  t.strictEqual(parent.absScale(), parent.absScale());
-  t.strictEqual(child.absScale(), child.absScale());
-  t.strictEqual(grandChild.absScale(), grandChild.absScale());
-
-  t.notStrictEqual(parent.absScale(), child.absScale());
-  t.notStrictEqual(grandChild.absScale(), child.absScale());
-  t.notStrictEqual(parent.absScale(), grandChild.absScale());
-});
-
 test('abs location, no rot no scale', function(t) {
   t.plan(3);
 
-  var parent = new Spatial();
-  var child = new Spatial();
-  var grandChild = new Spatial();
+  var parent = new Transform();
+  var child = new Transform();
+  var grandChild = new Transform();
   mockEntities(parent, child, grandChild);
 
   parent.position.set(1, 2);
@@ -110,30 +90,30 @@ test('abs location, no rot no scale', function(t) {
 test('abs location + scale', function(t) {
   t.plan(3);
 
-  var parent = new Spatial();
-  var child = new Spatial();
-  var grandChild = new Spatial();
+  var parent = new Transform();
+  var child = new Transform();
+  var grandChild = new Transform();
   mockEntities(parent, child, grandChild);
 
   parent.position.set(1, 2);
-  parent.scale.set(2, 3);
+  parent.scale = 2;
 
   child.position.set(3, 4);
-  child.scale.set(3, 4);
+  child.scale = 3;
 
   grandChild.position.set(5, 6);
 
   t.deepEqual(parent.absPosition(), {x: 1, y: 2});
-  t.deepEqual(child.absPosition(), {x: 7, y: 14});
-  t.deepEqual(grandChild.absPosition(), {x: 37, y: 86});
+  t.deepEqual(child.absPosition(), {x: 7, y: 10});
+  t.deepEqual(grandChild.absPosition(), {x: 37, y: 46});
 });
 
 test('abs position with rotation', function(t) {
   t.plan(3);
 
-  var parent = new Spatial();
-  var child = new Spatial();
-  var grandChild = new Spatial();
+  var parent = new Transform();
+  var child = new Transform();
+  var grandChild = new Transform();
   mockEntities(parent, child, grandChild);
 
   parent.position.set(1,0);

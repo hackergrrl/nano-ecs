@@ -1,5 +1,22 @@
 # Change History
 
+## 3.0.0 (?)
+
+* Removal of `QuadTree`, will make an appearance again in `tiny-ecs-physics`.
+* Renamed `Spatial` to `Transform`
+* A `Transform` `scale` property is now a scaler (`Number`) instead of a vector
+  (`Vec2`).
+* Added `Loop` class for setting up and running simultaneous fixed and variable
+  game loops for deterministic simulations at variable render framerates. Uses
+  a `Messenger` to fire clock events.
+* `Entity` objects now have an auto-incremented unique `id` property of type
+  `Number`.
+* `Entity` objects now have member function `trigger()` that fires an event via
+  the underlying `EntityManager#messenger` object.
+* Added `distance`, `distance2`, and `circleIntersect` functions to `Vec2`
+  class.
+* Renamed misspelled `Messanger` to `Messenger`.
+
 ## 2.0.0 (2014-01-30)
 
 * Added `Messanger` to serve as event hub for entities and other systems.

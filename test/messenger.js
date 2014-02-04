@@ -1,5 +1,5 @@
 var test      = require('tape');
-var Messanger = require('../lib/Messanger.js');
+var Messenger = require('../lib/Messenger.js');
 
 function mockEntity(Comps) {
   Comps = Comps || [];
@@ -12,10 +12,10 @@ function mockEntity(Comps) {
   };
 }
 
-test('Messanger, basic triggering', function(t) {
+test('Messenger, basic triggering', function(t) {
   t.plan(2);
 
-  var m = new Messanger();
+  var m = new Messenger();
 
   m.listenTo('event', function() { t.pass('fired'); });
 
@@ -31,7 +31,7 @@ test('With entity and option', function(t) {
   var O = {};
   var E = {};
 
-  var m = new Messanger();
+  var m = new Messenger();
   m.listenTo('event', function(entity, option) {
     t.strictEqual(entity, E);
     t.strictEqual(option, O);
@@ -47,7 +47,7 @@ test('With component filter', function(t) {
   function C1() { }
   function C2() { }
 
-  var m = new Messanger();
+  var m = new Messenger();
 
   m.listenTo('event', function() { t.pass('made it'); })
     .whereComponents([C1, C2]);

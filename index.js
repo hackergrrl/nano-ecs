@@ -1,11 +1,11 @@
 module.exports = {
 
-  Entity         : require('./lib/Entity.js'),
-  EntityManager  : require('./lib/EntityManager.js'),
-  Messanger      : require('./lib/Messanger.js'),
-  ObjectPool     : require('./lib/ObjectPool.js'),
-  QuadTree       : require('./lib/QuadTree.js'),
-  Spatial        : require('./lib/Spatial.js'),
-  Vec2           : require('./lib/Vec2.js')
+  Entity        : require('./lib/Entity.js'),
+  EntityManager : require('./lib/EntityManager.js'),
+  Loop          : require('./lib/Loop.js'),
+  Messenger     : require('./lib/Messenger.js'),
+  ObjectPool    : require('./lib/ObjectPool.js'),
+  Transform     : require('./lib/Transform.js'),
+  Vec2          : require('./lib/Vec2.js')
 
 };
