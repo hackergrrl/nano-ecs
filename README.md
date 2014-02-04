@@ -7,6 +7,15 @@ A mean lean Entity-Component-System library.
 
 [![browser support](https://ci.testling.com/bvalosek/tiny-ecs.png)](https://ci.testling.com/bvalosek/tiny-ecs)
 
+TinyECS is not a ready-to-go game engine framework, it is a small library of
+some very performance critical pieces and common utility classes that can be
+used to make a game from scratch.
+
+See also:
+
+* tiny-ecs-physics
+* tiny-ecs-canvas-2d
+
 ## Installation
 
 Works on the server or the browser (via [Browserify](http://browserify.org)):
@@ -17,7 +26,7 @@ npm install tiny-ecs
 
 ## Usage
 
-Manage entities via an `EntityManager` instance:
+Manage your entities via an `EntityManager` instance:
 
 ```javascript
 var EntityManager = require('tiny-ecs').EntityManager;
@@ -25,23 +34,28 @@ var EntityManager = require('tiny-ecs').EntityManager;
 var entities = new EntityManager();
 ```
 
-## Creating Entities
+### Creating Entities
 
-Create an entity:
+Create an entity with the default `Transform` component:
+
+```javascript
+var hero = entities.create();
+```
+
+Or if you don't want to include the `Transform` component:
 
 ```javascript
 var hero = entities.createEntity();
 ```
 
-### Working with Entities
+### Adding Components
 
-Components are added via providing any generic constructor function:
+A component is just a basic Javascript class.
 
 ```javascript
-function Position()
+function PlayerControlled()
 {
-  this.x = 0;
-  this.y = 0;
+  this.gamepad = 1;
 }
 ```
 
@@ -55,14 +69,14 @@ function Sprite()
 Add the components:
 
 ```javascript
-hero.addComponent(Position).addComponent(Sprite);
+hero.addComponent(Damager).addComponent(Sprite);
 ```
 
 We now have new data members on our entity for the components. TinyECS will add
-an instance member that is the name of the component constructor, lowercased.
+an instance member that is the name of the component constructor, lowercased:
 
 ```javascript
-hero.position.x = 10;
+hero.playerControlled.gamepad = 2;
 hero.sprite.image === 'hero.png'; // true
 ```
 
@@ -82,13 +96,13 @@ hero.removeTag('player');
 To determine if an entity has a specific component:
 
 ```javascript
-if (hero.hasComponent(Position)) { ... }
+if (hero.hasComponent(Transform)) { ... }
 ```
 
 And to check if an entity has ALL of a set of components:
 
 ```javascript
-if (hero.hasAllComponents([Position, Sprite])) { ... }
+if (hero.hasAllComponents([Transform, Sprite])) { ... }
 ```
 
 ### Querying Entities
@@ -100,7 +114,7 @@ entities.
 Get all entities that have a specific set of components:
 
 ```javascript
-var toDraw = entities.queryComponents([Position, Sprite]);
+var toDraw = entities.queryComponents([Transform, Sprite]);
 ```
 
 Get all entities with a certain tag:
@@ -111,16 +125,8 @@ var enemies = entities.queryTag('enemy');
 
 ### Removing Entities
 
-Directly:
-
 ```javascript
 hero.remove();
-```
-
-Via the manager:
-
-```javascript
-entities.remove(hero);
 ```
 
 ### Creating Components
@@ -128,14 +134,6 @@ entities.remove(hero);
 Any object constructor can be used as a component, nothing special required.
 Components should be lean, primarily data containers, leaving all the heavy
 lifting for the systems.
-
-```javascript
-function Position()
-{
-  this.x = 0;
-  this.y = 0;
-}
-```
 
 ### Creating Systems
 
@@ -156,7 +154,7 @@ function PhysicsSystem(entities)
 
 PhysicsSystem.prototype.update = function(dt, time)
 {
-  var toUpdate = this.entities.queryComponents([Position, Physics]);
+  var toUpdate = this.entities.queryComponents([Transform, RigidBody]);
 
   toUpdate.forEach(function(entity) { ... });
   ...
