@@ -13,9 +13,10 @@
   `Number`.
 * `Entity` objects now have member function `trigger()` that fires an event via
   the underlying `EntityManager#messenger` object.
-* Added `distance`, `distance2`, and `circleIntersect` functions to `Vec2`
-  class.
+* Added `distance`, `distance2`, `perp`, `lperp`, `project`, and
+  `circleIntersect` functions to `Vec2` class.
 * Renamed misspelled `Messanger` to `Messenger`.
+* Fixed clobbering of tag list on entity remove (pooling issues)
 
 ## 2.0.0 (2014-01-30)
 
