@@ -1,62 +1,61 @@
-var test          = require('tape');
-var EntityManager = require('../lib/EntityManager.js');
+var test = require('tape')
+var EntityManager = require('../lib/EntityManager.js')
 
-test('Entity create', function(t) {
-  var m = new EntityManager();
+test('Entity create', function (t) {
+  var m = new EntityManager()
 
-  m.createEntity();
-
-  t.end()
-});
-
-test('Entity remove', function(t) {
-  var m = new EntityManager();
-
-  m.createEntity().remove();
+  m.createEntity()
 
   t.end()
-});
+})
 
-test('Component add', function(t) {
-  t.plan(4);
+test('Entity remove', function (t) {
+  var m = new EntityManager()
 
-  function C() { }
+  m.createEntity().remove()
 
-  var m = new EntityManager();
+  t.end()
+})
+
+test('Component add', function (t) {
+  t.plan(4)
+
+  function C () { }
+
+  var m = new EntityManager()
 
   var entity = m.createEntity()
 
-  entity.on('component added', function(T) {
-      t.pass('made it');
-      t.strictEqual(entity._manager, m);
-      t.strictEqual(T, C);
-      t.strictEqual(m.count(), 1);
-  });
-  
-  entity.addComponent(C);
-});
+  entity.on('component added', function (T) {
+    t.pass('made it')
+    t.strictEqual(entity._manager, m)
+    t.strictEqual(T, C)
+    t.strictEqual(m.count(), 1)
+  })
 
-test('Component remove', function(t) {
-  t.plan(6);
+  entity.addComponent(C)
+})
 
-  function C() { }
+test('Component remove', function (t) {
+  t.plan(6)
 
-  var m = new EntityManager();
+  function C () { }
+
+  var m = new EntityManager()
 
   var entity = m.createEntity()
 
-  entity.on('component added', function(T) {
-      t.strictEqual(entity._manager, m);
-      t.strictEqual(T, C);
-      t.strictEqual(m.count(), 1);
-  });
+  entity.on('component added', function (T) {
+    t.strictEqual(entity._manager, m)
+    t.strictEqual(T, C)
+    t.strictEqual(m.count(), 1)
+  })
 
-  entity.on('component removed', function(T) {
-      t.pass('made it');
-      t.strictEqual(entity._manager, m);
-      t.strictEqual(T, C);
-  });
+  entity.on('component removed', function (T) {
+    t.pass('made it')
+    t.strictEqual(entity._manager, m)
+    t.strictEqual(T, C)
+  })
 
-  entity.addComponent(C).removeComponent(C);
-});
-
+  entity.addComponent(C).removeComponent(C)
+})
