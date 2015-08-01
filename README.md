@@ -1,38 +1,31 @@
-# TinyECS
+# nano-ecs
 
-[![Build Status](https://travis-ci.org/bvalosek/tiny-ecs.png?branch=master)](https://travis-ci.org/bvalosek/tiny-ecs)
-[![NPM version](https://badge.fury.io/js/tiny-ecs.png)](http://badge.fury.io/js/tiny-ecs)
+> A nano-sized entity-component-system module.
 
-A mean lean Entity-Component-System library.
-
-[![browser support](https://ci.testling.com/bvalosek/tiny-ecs.png)](https://ci.testling.com/bvalosek/tiny-ecs)
-
-TinyECS is not a ready-to-go game engine framework, it is a small library of
-some very performance critical pieces and common utility classes that can be
+nano-ecs is not a ready-to-go game engine framework, but rather a small library
+of some very performance critical pieces and common utility classes that can be
 used to make a game from scratch.
 
-See also:
-
-* tiny-ecs-physics
-* tiny-ecs-canvas-2d
 
 ## Installation
 
 Works on the server or the browser (via [Browserify](http://browserify.org)):
 
 ```
-npm install tiny-ecs
+npm install nano-ecs
 ```
+
 
 ## Usage
 
 Manage your entities via an `EntityManager` instance:
 
 ```javascript
-var EntityManager = require('tiny-ecs').EntityManager;
+var EntityManager = require('nano-ecs').EntityManager;
 
 var entities = new EntityManager();
 ```
+
 
 ### Creating Entities
 
@@ -47,6 +40,7 @@ Or if you don't want to include the `Transform` component:
 ```javascript
 var hero = entities.createEntity();
 ```
+
 
 ### Adding Components
 
@@ -72,7 +66,7 @@ Add the components:
 hero.addComponent(Damager).addComponent(Sprite);
 ```
 
-We now have new data members on our entity for the components. TinyECS will add
+We now have new data members on our entity for the components. nano-ecs will add
 an instance member that is the name of the component constructor, lowercased:
 
 ```javascript
@@ -105,6 +99,7 @@ And to check if an entity has ALL of a set of components:
 if (hero.hasAllComponents([Transform, Sprite])) { ... }
 ```
 
+
 ### Querying Entities
 
 The entity manager is setup with indexed queries, allowing extremely fast
@@ -123,11 +118,13 @@ Get all entities with a certain tag:
 var enemies = entities.queryTag('enemy');
 ```
 
+
 ### Removing Entities
 
 ```javascript
 hero.remove();
 ```
+
 
 ### Creating Components
 
@@ -135,15 +132,16 @@ Any object constructor can be used as a component, nothing special required.
 Components should be lean, primarily data containers, leaving all the heavy
 lifting for the systems.
 
+
 ### Creating Systems
 
-In TinyECS, there is no formal notion of a system. A system is considered any
+In nano-ecs, there is no formal notion of a system. A system is considered any
 context in which entities and their components are updated. As to how this
 occurs will vary depending on your use.
 
-In the example of a game, mainting a list of systems that are instantiated with
-some sort of IoC container that request a list of entities seems like a good
-idea.
+In the example of a game, maintaining a list of systems that are instantiated
+with some sort of IoC container that request a list of entities seems like a
+good idea.
 
 ```
 function PhysicsSystem(entities)
@@ -161,6 +159,14 @@ PhysicsSystem.prototype.update = function(dt, time)
 }
 ```
 
+
+## Events
+
+All entities are event emitters.
+
+**TODO**: example
+
+
 ## Tern Support
 
 The source files are all decorated with [JSDoc3](http://usejsdoc.org/)-style
@@ -168,18 +174,16 @@ annotations that work great with the [Tern](http://ternjs.net/) code inference
 system. Combined with the Node plugin (see this project's `.tern-project`
 file), you can have intelligent autocomplete for methods in this library.
 
+
 ## Testing
 
 Testing is done with [Tape](http://github.com/substack/tape) and can be run
 with the command `npm test`.
 
-Automated CI cross-browser testing is provided by
-[Testling](http://ci.testling.com/bvalosek/tiny-ecs).
-
 
 ## License
-Copyright 2014 Brandon Valosek
+Copyright 2014 Brandon Valosek, forked and modified by Stephen Whitmore.
 
-**TinyECS** is released under the MIT license.
+**nano-ecs** is released under the MIT license.
 
 
