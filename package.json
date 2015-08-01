@@ -1,7 +1,7 @@
 {
-  "name": "tiny-ecs",
-  "version": "2.0.0",
-  "description": "A mean lean Entity-Component-System library.",
+  "name": "nano-ecs",
+  "version": "0.0.1",
+  "description": "A very lean Entity-Component-System-like library.",
   "keywords": [
     "entity",
     "component",
@@ -9,11 +9,20 @@
     "entities",
     "game"
   ],
-  "author": {
-    "name": "Brandon Valosek",
-    "email": "bvalosek@gmail.com",
-    "url": "http://brandon.is/awesome"
-  },
+  "author": [
+    {
+      "name": "Brandon Valosek",
+      "email": "bvalosek@gmail.com",
+      "url": "http://brandon.is/awesome"
+      "role": "original author of tiny-ecs"
+    },
+    {
+      "name": "Stephen Whitmore",
+      "email": "sww@eight45.net",
+      "url": "http://eight45.net",
+      "role": "mad forker"
+    },
+  ]
   "directories": {
     "test": "test"
   },
@@ -27,7 +36,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:bvalosek/tiny-ecs.git"
+    "url": "git@github.com:noffle/nano-ecs.git"
   },
   "testling": {
     "files": "test/*.js",
