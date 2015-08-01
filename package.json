@@ -13,7 +13,7 @@
     {
       "name": "Brandon Valosek",
       "email": "bvalosek@gmail.com",
-      "url": "http://brandon.is/awesome"
+      "url": "http://brandon.is/awesome",
       "role": "original author of tiny-ecs"
     },
     {
@@ -21,8 +21,8 @@
       "email": "sww@eight45.net",
       "url": "http://eight45.net",
       "role": "mad forker"
-    },
-  ]
+    }
+  ],
   "directories": {
     "test": "test"
   },

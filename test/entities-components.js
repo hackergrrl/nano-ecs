@@ -1,5 +1,4 @@
 var EntityManager = require('../lib/EntityManager.js');
-var Transform     = require('../lib/Transform.js');
 
 var test = require('tape');
 
@@ -87,12 +86,3 @@ test('Throw in incorrect entity removal', function(t) {
 
 });
 
-test('Create comes with transform for FREE', function(t) {
-  t.plan(1);
-
-  var entities = new EntityManager();
-  var e = entities.create();
-
-  t.ok(e.hasComponent(Transform));
-
-});
