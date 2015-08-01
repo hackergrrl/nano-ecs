@@ -27,7 +27,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "tape test/*.js"
+    "test": "standard && tape test/*.js"
   },
   "main": "index.js",
   "license": "MIT",
