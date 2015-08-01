@@ -3,10 +3,18 @@
 > A nano-sized entity-component-system module.
 
 `nano-ecs` is not a big bloated game engine framework, but rather a small
-focused module that [does one thing well](unix link): creating and managing a
-set of entities and their components.
+focused module that [does one thing
+well](https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well):
+creating and managing a set of entities and their components.
 
-> TODO: background links on theory of ECS (maybe an article of mine?)
+
+## Background
+
+If you aren't familiar with paradigm of entity-component-systems (or "ECS" as
+the cool kids call it), you may get some background mileage from [this talk of
+mine](https://github.com/noffle/ECSTalk/blob/master/ECS%20Presentation.pdf), or
+[this article
+here](http://www.gamedev.net/page/resources/_/technical/game-programming/understanding-component-entity-systems-r3013).
 
 
 ## Installation
@@ -159,7 +167,7 @@ function PhysicsSystem (world)
 ```
 
 
-## Events
+### Events
 
 All entities can act as event emitters. One part of the game code can raise an
 event on an entity that a specific component or other system is free to handle:
@@ -176,6 +184,11 @@ function Health (entity) {
   })
 }
 ```
+
+
+## API
+
+> TODO: api listing
 
 
 ## Testing
