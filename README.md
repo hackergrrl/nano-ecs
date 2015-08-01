@@ -2,9 +2,11 @@
 
 > A nano-sized entity-component-system module.
 
-nano-ecs is not a ready-to-go game engine framework, but rather a small library
-of some very performance critical pieces and common utility classes that can be
-used to make a game from scratch.
+`nano-ecs` is not a big bloated game engine framework, but rather a small
+focused module that [does one thing well](unix link): creating and managing a
+set of entities and their components.
+
+> TODO: background links on theory of ECS (maybe an article of mine?)
 
 
 ## Installation
@@ -18,33 +20,28 @@ npm install nano-ecs
 
 ## Usage
 
-Manage your entities via an `EntityManager` instance:
+Manage your entities via a `nano` entity manager instance:
 
 ```javascript
-var EntityManager = require('nano-ecs').EntityManager;
+var nano = require('nano-ecs')
 
-var entities = new EntityManager();
+var world = nano()
 ```
 
 
 ### Creating Entities
 
-Create an entity with the default `Transform` component:
+Create an entity, bereft of components:
 
 ```javascript
-var hero = entities.create();
-```
-
-Or if you don't want to include the `Transform` component:
-
-```javascript
-var hero = entities.createEntity();
+var hero = world.createEntity();
 ```
 
 
 ### Adding Components
 
-A component is just a basic Javascript class.
+A component is just a function that defines whatever properties on `this` that
+it'd like:
 
 ```javascript
 function PlayerControlled()
@@ -60,24 +57,28 @@ function Sprite()
 }
 ```
 
-Add the components:
+Components are added using `addComponent` and support chaining:
 
 ```javascript
-hero.addComponent(Damager).addComponent(Sprite);
+hero.addComponent(PlayerControlled).addComponent(Sprite);
 ```
 
-We now have new data members on our entity for the components. nano-ecs will add
-an instance member that is the name of the component constructor, lowercased:
+Preferring convention over configuration, `nano-ecs` will add an instance member
+that is the name of the component constructor, camelCased:
 
 ```javascript
 hero.playerControlled.gamepad = 2;
 hero.sprite.image === 'hero.png'; // true
 ```
 
-Add arbitrary text tags to an entity:
+Entities can be tagged with a string for fast retrieval:
 
 ```javascript
 hero.addTag('player');
+
+...
+
+var hero = world.queryTag('player')[0]
 ```
 
 You can also remove components and tags in much the same way:
@@ -87,13 +88,14 @@ hero.removeComponent(Sprite);
 hero.removeTag('player');
 ```
 
-To determine if an entity has a specific component:
+`hasComponent` will efficiently determine if an entity has a specific single
+component:
 
 ```javascript
 if (hero.hasComponent(Transform)) { ... }
 ```
 
-And to check if an entity has ALL of a set of components:
+A set of components can also be quickly checked:
 
 ```javascript
 if (hero.hasAllComponents([Transform, Sprite])) { ... }
@@ -102,9 +104,10 @@ if (hero.hasAllComponents([Transform, Sprite])) { ... }
 
 ### Querying Entities
 
-The entity manager is setup with indexed queries, allowing extremely fast
-querying of the current entities. Querying entities returns an array of
-entities.
+The entity manager indexes entities and their components, allowing extremely
+fast queries.
+
+Entity queries return an array of entities.
 
 Get all entities that have a specific set of components:
 
@@ -126,51 +129,60 @@ hero.remove();
 ```
 
 
-### Creating Components
+### Components
 
-Any object constructor can be used as a component, nothing special required.
-Components should be lean, primarily data containers, leaving all the heavy
-lifting for the systems.
+Any object constructor can be used as a component--nothing special required.
+Components should be lean data containers, leaving all the heavy lifting for the
+systems.
 
 
 ### Creating Systems
 
-In nano-ecs, there is no formal notion of a system. A system is considered any
+In `nano-ecs`, there is no formal notion of a system. A system is considered any
 context in which entities and their components are updated. As to how this
 occurs will vary depending on your use.
 
-In the example of a game, maintaining a list of systems that are instantiated
-with some sort of IoC container that request a list of entities seems like a
-good idea.
+In the example of a game, you could maintain a list of systems that are
+instantiated with a reference to the entity's world:
 
 ```
-function PhysicsSystem(entities)
+function PhysicsSystem (world)
 {
-  // Dependency inject -- reference to our EntityManager
-  this.entities = entities;
-}
+  this.update = function (dt, time) {
+    var candidates = world.queryComponents([Transform, RigidBody]);
 
-PhysicsSystem.prototype.update = function(dt, time)
-{
-  var toUpdate = this.entities.queryComponents([Transform, RigidBody]);
-
-  toUpdate.forEach(function(entity) { ... });
-  ...
+    candidates.forEach(function(entity) {
+      ...
+    });
+  }
 }
 ```
 
 
 ## Events
 
-All entities are event emitters.
+All entities can act as event emitters. One part of the game code can raise an
+event on an entity that a specific component or other system is free to handle:
 
-**TODO**: example
+```javascript
+function Health (entity) {
+  this.hp = 100
+
+  entity.on('damage', function (amount) {
+    this.hp -= amount
+    if (this.hp < 0) {
+      entity.emit('death')
+    }
+  })
+}
+```
 
 
 ## Testing
 
 Testing is done with [Tape](http://github.com/substack/tape) and can be run
-with the command `npm test`.
+with the command `npm test`. There is also a pre-commit hook that will ensure
+tests pass before any commit is permitted.
 
 
 ## License
