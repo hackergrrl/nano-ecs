@@ -1,11 +1,11 @@
-var EntityManager = require('../lib/EntityManager.js')
+var nano = require('../index')
 
 var test = require('tape')
 
 test('Adding and removing entities', function (t) {
   t.plan(5)
 
-  var entities = new EntityManager()
+  var entities = nano()
 
   t.strictEqual(entities.count(), 0)
   var e1 = entities.createEntity()
@@ -22,7 +22,7 @@ test('Adding and removing entities', function (t) {
 test('Adding components to entity and querying', function (t) {
   t.plan(11)
 
-  var entities = new EntityManager()
+  var entities = nano()
   function C () { }
   function D () { }
 
@@ -53,7 +53,7 @@ test('Adding components to entity and querying', function (t) {
 test('Removing entities and querying on components', function (t) {
   t.plan(4)
 
-  var entities = new EntityManager()
+  var entities = nano()
   function C () { }
   function D () { }
 
@@ -77,7 +77,7 @@ test('Removing entities and querying on components', function (t) {
 test('Throw in incorrect entity removal', function (t) {
   t.plan(1)
 
-  var entities = new EntityManager()
+  var entities = nano()
   var e1 = entities.createEntity()
   entities.removeEntity(e1)
   t.throws(function () {

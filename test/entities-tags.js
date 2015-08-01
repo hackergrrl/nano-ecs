@@ -1,10 +1,10 @@
-var EntityManager = require('../lib/EntityManager.js')
 var test = require('tape')
+var nano = require('../index')
 
 test('Add and remove tags', function (t) {
   t.plan(12)
 
-  var entities = new EntityManager()
+  var entities = nano()
   var tag = 't'
   var tag2 = 't2'
 
@@ -38,7 +38,7 @@ test('Add and remove tags', function (t) {
 test('Adding and removing entities with tags', function (t) {
   t.plan(4)
 
-  var entities = new EntityManager()
+  var entities = nano()
   var tag = 't'
   var tag2 = 't2'
 

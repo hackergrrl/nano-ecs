@@ -1,8 +1,8 @@
 var test = require('tape')
-var EntityManager = require('../lib/EntityManager.js')
+var nano = require('../index')
 
 test('Entity create', function (t) {
-  var m = new EntityManager()
+  var m = nano()
 
   m.createEntity()
 
@@ -10,7 +10,7 @@ test('Entity create', function (t) {
 })
 
 test('Entity remove', function (t) {
-  var m = new EntityManager()
+  var m = nano()
 
   m.createEntity().remove()
 
@@ -22,7 +22,7 @@ test('Component add', function (t) {
 
   function C () { }
 
-  var m = new EntityManager()
+  var m = nano()
 
   var entity = m.createEntity()
 
@@ -41,7 +41,7 @@ test('Component remove', function (t) {
 
   function C () { }
 
-  var m = new EntityManager()
+  var m = nano()
 
   var entity = m.createEntity()
 
