@@ -17,6 +17,15 @@ mine](https://github.com/noffle/ECSTalk/blob/master/ECS%20Presentation.pdf), or
 here](http://www.gamedev.net/page/resources/_/technical/game-programming/understanding-component-entity-systems-r3013).
 
 
+## Motivation
+
+`nano-ecs` was created as fork of
+[`tiny-ecs`](https://github.com/bvalosek/tiny-ecs), which provides similar
+functionality, but tries to do much more than basic ECS (timers, 2d transforms,
+object pools, etc). The goal of `nano-ecs` is to provide only a core lightweight
+ECS implementation.
+
+
 ## Installation
 
 Works on the server or the browser (via [Browserify](http://browserify.org)):
