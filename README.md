@@ -186,24 +186,80 @@ function Health (entity) {
 ```
 
 
-## API
+## Entity Manager API
 
-### EntityManager#createEntity()
-### EntityManager#removeEntitiesByTag(tag)
-### EntityManager#removeAllEntities()
-### EntityManager#removeEntity(entity)
+```javascript
+var world = require('nano-ecs')()
+```
 
-### EntityManager#entityAddTag(entity, tag)
-### EntityManager#entityRemoveTag(entity, tag)
+### world.createEntity()
 
-### EntityManager#entityAddComponent(entity, Component)
-### EntityManager#entityRemoveAllComponents(entity)
-### EntityManager#entityRemoveComponent(entity, Component)
+Create a new, component-less entity.
 
-### EntityManager#queryComponents(Components)
-### EntityManager#queryTag(tag)
+### world.removeAllEntities()
 
-### EntityManager#count()
+Remove all entities from the world.
+
+### world.removeEntity(entity)
+
+Remove a specific entity by reference.
+
+### world.removeEntitiesByTag(tag)
+
+Remove all entities with a given tag.
+
+### world.queryComponents(components=[])
+
+Returns a list of all entities with the full list of components given.
+
+### world.queryTag(tag)
+
+Returns a list of all entities with the given tag.
+
+### world.count()
+
+Returns the total number of entities in the world.
+
+
+## Entity API
+
+```javascript
+var entity = require('nano-ecs')().createEntity()
+```
+
+### entity.remove()
+
+Remove the entity from the world.
+
+### entity.addComponent(TComponent)
+
+Add a component to an entity, by constructor function name.
+
+### entity.removeComponent(TComponent)
+
+Remove a component from the entity, by constructor function name.
+
+### entity.hasComponent(TComponent)
+
+Returns true if the entity has the component (by constructor function name),
+false otherwise.
+
+### entity.hasAllComponents(components=[])
+
+Returns true if the entity has all of the components (by constructor function
+name), false otherwise.
+
+### entity.hasTag(tag)
+
+Returns true if the entity has the given tag, false otherwise.
+
+### entity.addTag(tag)
+
+Adds the given tag to the entity.
+
+### entity.removeTag(tag)
+
+Remove the given tag from the entity.
 
 
 ## Testing
