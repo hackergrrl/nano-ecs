@@ -188,14 +188,30 @@ function Health (entity) {
 
 ## API
 
-> TODO: api listing
+### EntityManager#createEntity()
+### EntityManager#removeEntitiesByTag(tag)
+### EntityManager#removeAllEntities()
+### EntityManager#removeEntity(entity)
+
+### EntityManager#entityAddTag(entity, tag)
+### EntityManager#entityRemoveTag(entity, tag)
+
+### EntityManager#entityAddComponent(entity, Component)
+### EntityManager#entityRemoveAllComponents(entity)
+### EntityManager#entityRemoveComponent(entity, Component)
+
+### EntityManager#queryComponents(Components)
+### EntityManager#queryTag(tag)
+
+### EntityManager#count()
 
 
 ## Testing
 
-Testing is done with [Tape](http://github.com/substack/tape) and can be run
-with the command `npm test`. There is also a pre-commit hook that will ensure
-tests pass before any commit is permitted.
+Testing is done with [Tape](http://github.com/substack/tape) or any other
+software supporting the [Test Anything Protocol](https://testanything.org) and
+can be run with the command `npm test`. There is also a pre-commit hook that
+will ensure tests pass before any commit is permitted.
 
 
 ## License
