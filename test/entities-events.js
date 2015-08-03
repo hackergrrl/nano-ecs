@@ -59,3 +59,29 @@ test('Component remove', function (t) {
 
   entity.addComponent(C).removeComponent(C)
 })
+
+test('EventEmitter recycling', function (t) {
+  t.plan(2)
+
+  function C () { }
+
+  var m = nano()
+
+  var entity = m.createEntity()
+
+  entity.on('component added', function (T) {
+    t.ok('callback hit')
+  })
+
+  entity.addComponent(C)
+
+  entity.remove()
+
+  var entity2 = m.createEntity()
+
+  t.equals(entity, entity2)
+
+  entity2.addComponent(C)
+
+  t.end()
+})
