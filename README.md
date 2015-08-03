@@ -179,16 +179,20 @@ All entities can act as event emitters. One part of the game code can raise an
 event on an entity that a specific component or other system is free to handle:
 
 ```javascript
-function Health (entity) {
+function Health () {
   this.hp = 100
-
-  entity.on('damage', function (amount) {
-    this.hp -= amount
-    if (this.hp < 0) {
-      entity.emit('death')
-    }
-  })
 }
+
+var entity = world.createEntity()
+
+entity.addComponent(Health)
+
+entity.on('damage', function (amount) {
+  this.hp -= amount
+  if (this.hp < 0) {
+    entity.emit('death')
+  }
+})
 ```
 
 
