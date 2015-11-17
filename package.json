@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "A very lean Entity-Component-System-like library.",
   "keywords": [
-    "entity",
     "component",
-    "system",
     "entities",
-    "game"
+    "entity",
+    "game",
+    "system"
   ],
   "author": [
     {
@@ -40,20 +40,21 @@
     "url": "git@github.com:noffle/nano-ecs.git"
   },
   "testling": {
-    "files": "test/*.js",
     "browsers": [
-      "ie/8..latest",
+      "android-browser/latest",
       "chrome/28..canary",
       "firefox/23..nightly",
-      "safari/5.1..latest",
+      "ie/8..latest",
+      "ipad/latest",
+      "iphone/latest",
       "opera/latest",
       "opera/next",
-      "iphone/latest",
-      "ipad/latest",
-      "android-browser/latest"
-    ]
+      "safari/5.1..latest"
+    ],
+    "files": "test/*.js"
   },
   "dependencies": {
+    "reuse-pool": "^1.0.2",
     "typedef": "~1.0.2"
   }
 }
