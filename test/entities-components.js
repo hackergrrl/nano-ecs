@@ -16,7 +16,6 @@ test('Adding and removing entities', function (t) {
   t.strictEqual(entities.count(), 1)
   entities.removeEntity(e2)
   t.strictEqual(entities.count(), 0)
-
 })
 
 test('Adding components to entity and querying', function (t) {
@@ -47,7 +46,6 @@ test('Adding components to entity and querying', function (t) {
 
   entities.entityRemoveComponent(entity, C)
   t.deepEqual(entities.queryComponents([C]), [])
-
 })
 
 test('Removing entities and querying on components', function (t) {
@@ -71,7 +69,6 @@ test('Removing entities and querying on components', function (t) {
   t.deepEqual(entities.queryComponents([D, C]), [e2])
   entities.removeEntity(e2)
   t.deepEqual(entities.queryComponents([D, C]), [])
-
 })
 
 test('Throw in incorrect entity removal', function (t) {
@@ -83,5 +80,4 @@ test('Throw in incorrect entity removal', function (t) {
   t.throws(function () {
     entities.removeEntity(e1)
   })
-
 })

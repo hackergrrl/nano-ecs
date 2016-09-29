@@ -21,5 +21,4 @@ test('Case', function (t) {
   t.deepEqual(m.queryTag('a'), [])
   t.deepEqual(m.queryTag('b'), [])
   t.deepEqual(m.queryTag('c'), [])
-
 })

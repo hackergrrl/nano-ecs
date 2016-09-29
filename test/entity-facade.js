@@ -29,7 +29,6 @@ test('Add / remove components', function (t) {
 
   e1.removeComponent(C)
   t.deepEqual(entities.queryComponents([C]), [])
-
 })
 
 test('Add / remove tags', function (t) {
@@ -63,5 +62,4 @@ test('Add / remove tags', function (t) {
   e2.removeTag(tag)
   t.deepEqual(entities.queryTag(tag), [])
   t.deepEqual(e2._tags, [])
-
 })

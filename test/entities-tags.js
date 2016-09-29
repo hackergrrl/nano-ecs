@@ -32,7 +32,6 @@ test('Add and remove tags', function (t) {
   entities.entityRemoveTag(e2, tag)
   t.deepEqual(entities.queryTag(tag), [])
   t.deepEqual(e2._tags, [])
-
 })
 
 test('Adding and removing entities with tags', function (t) {
@@ -54,5 +53,4 @@ test('Adding and removing entities with tags', function (t) {
   entities.removeEntity(e1)
   t.deepEqual(entities.queryTag(tag), [])
   t.deepEqual(entities.queryTag(tag2), [e2])
-
 })
