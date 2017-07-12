@@ -88,13 +88,13 @@ test('Throw on empty component property', function (t) {
   var entities = nano()
   var entity = entities.createEntity()
 
-  t.throws(function() {
+  t.throws(function () {
     entities.entityAddComponent(entity, function () {})
   }, Error, 'anonymous function')
 
-  t.throws(function() {
+  t.throws(function () {
     var object = {}
-    object.method = function() {}
+    object.method = function () {}
     entities.entityAddComponent(entity, object.method)
   }, Error, 'anonymous function as object method')
 })
