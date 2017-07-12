@@ -81,3 +81,20 @@ test('Throw in incorrect entity removal', function (t) {
     entities.removeEntity(e1)
   })
 })
+
+test('Throw on empty component property', function (t) {
+  t.plan(2)
+
+  var entities = nano()
+  var entity = entities.createEntity()
+
+  t.throws(function() {
+    entities.entityAddComponent(entity, function () {})
+  }, Error, 'anonymous function')
+
+  t.throws(function() {
+    var object = {}
+    object.method = function() {}
+    entities.entityAddComponent(entity, object.method)
+  }, Error, 'anonymous function as object method')
+})
