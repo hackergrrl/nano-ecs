@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/noffle/nano-ecs.svg?branch=master)](https://travis-ci.org/noffle/nano-ecs)
+
 # nano-ecs
 
 > A nano-sized entity-component-system module.
