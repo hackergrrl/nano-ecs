@@ -79,6 +79,16 @@ Components are added using `addComponent` and support chaining:
 hero.addComponent(PlayerControlled).addComponent(Sprite);
 ```
 
+All parameters after `Sprite` are sent to the constructor. E.g.
+
+```js
+function Sprite (entity, imageName) {
+  this.image = imageName
+}
+
+entity.addComponent(Sprite, 'hero.png')
+```
+
 Preferring convention over configuration, `nano-ecs` will add an instance member
 that is the name of the component constructor, camelCased:
 
