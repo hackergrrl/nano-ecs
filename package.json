@@ -1,6 +1,6 @@
 {
   "name": "nano-ecs",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "A very lean Entity-Component-System-like library.",
   "keywords": [
     "component",
