@@ -19,11 +19,15 @@ test('Adding and removing entities', function (t) {
 })
 
 test('Adding components to entity and querying', function (t) {
-  t.plan(11)
+  t.plan(14)
 
   var entities = nano()
   function C () { }
   function D () { }
+  function E (_, foo, bar) {
+    this.foo = foo
+    this.bar = bar
+  }
 
   var entity = entities.createEntity()
 
@@ -32,6 +36,11 @@ test('Adding components to entity and querying', function (t) {
   t.deepEqual(entities.queryComponents([C]), [entity])
   entities.entityAddComponent(entity, C)
   t.deepEqual(entities.queryComponents([C]), [entity])
+
+  entity.addComponent(E, 'foo', 'bar')
+  t.ok(entity.e instanceof E, 'added')
+  t.equals(entity.e.foo, 'foo')
+  t.equals(entity.e.bar, 'bar')
 
   entities.entityAddComponent(entity, D)
   t.ok(entity.d instanceof D, 'added')
