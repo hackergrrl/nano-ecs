@@ -98,3 +98,27 @@ test('Throw on empty component property', function (t) {
     entities.entityAddComponent(entity, object.method)
   }, Error, 'anonymous function as object method')
 })
+
+test('Added component has first character lower-cased by default', function (t) {
+  t.plan(1)
+
+  var entities = nano()
+  function C () { }
+
+  var entity = entities.createEntity()
+
+  entities.entityAddComponent(entity, C)
+  t.ok(entity.c instanceof C, 'added lower-cased')
+})
+
+test('Added component first character is not lower-cased when camelCase option is false', function (t) {
+  t.plan(1)
+
+  var entities = nano({camelCase: false})
+  function C () { }
+
+  var entity = entities.createEntity()
+
+  entities.entityAddComponent(entity, C)
+  t.ok(entity.C instanceof C, 'added w/out case change')
+})
